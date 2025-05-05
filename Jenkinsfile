@@ -276,7 +276,7 @@ def publish(
     def tar_published = false
 
     echo "Cleaning repo ..."
-    sh "git clean -fdx '!zopen'"
+    sh "git clean -fdx -e zopen"
 
     for (python in python_executables_and_wheels_map.keySet()) {
       def wheel_default = python_executables_and_wheels_map[python]["wheelDefault"]
