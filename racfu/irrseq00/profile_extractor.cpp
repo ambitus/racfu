@@ -52,7 +52,11 @@ void ProfileExtractor::extract(SecurityRequest &request) {
     rc = callRadmin(reinterpret_cast<char *__ptr32>(&p_arg_area->arg_pointers));
     Logger::getInstance().debug("Done");
 
+    printf("p_arg_area->args.p_result_buffer: %p\n",
+           p_arg_area->args.p_result_buffer);
     request.setRawResultPointer(p_arg_area->args.p_result_buffer);
+    printf("request.getRawResultPointer(): %p\n",
+           request.getRawResultPointer());
     // Preserve Return & Reason Codes
     request.setSAFReturnCode(ntohl(p_arg_area->args.SAF_rc));
     request.setRACFReturnCode(ntohl(p_arg_area->args.RACF_rc));
@@ -96,6 +100,13 @@ void ProfileExtractor::extract(SecurityRequest &request) {
     request.setRACFReturnCode(ntohl(p_arg_area->args.RACF_rc));
     request.setRACFReasonCode(ntohl(p_arg_area->args.RACF_rsn));
   }
+
+  printf("request.getSAFReturnCode(): %d\n", request.getSAFReturnCode());
+  printf("request.getRACFReturnCode(): %d\n", request.getRACFReturnCode());
+  printf("request.getRACFReasonCode(): %d\n", request.getRACFReasonCode());
+  printf("rc: %u\n", rc);
+  printf("request.getRawResultPointer() (again): %p\n",
+         request.getRawResultPointer());
 
   // Check Return Codes
   if (request.getSAFReturnCode() != 0 or request.getRACFReturnCode() != 0 or
