@@ -57,6 +57,7 @@ dkms.conf
 
 # OSX Cache/Folder Data
 *.DS_Store
+*/DS_Store
 
 # Build Artifacts
 artifacts/
